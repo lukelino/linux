@@ -9,7 +9,7 @@ class TicTacToe:
         '12': (1, 0), '22': (1, 1), '32': (1, 2),
         '13': (0, 0), '23': (0, 1), '33': (0, 2)
     }
-    SIGNS = {'X': 1, 'O': 0}
+    SIGNS = {'X': 5, 'O': 4, '_': 1}
     OPTIONS = ['_', 'X', 'O']
     BATTLEFIELD = [[''] * 3 for _ in range(3)]
 
@@ -20,14 +20,18 @@ class TicTacToe:
         self.o = 0
         self.empty = 0
         self.turn = 'X'
-        self.winner = ''
 
     def print_battlefield(self):
         print('-' * 9)
         for i in range(3):
             print('| ', end='')
             for j in range(3):
-                print(self.battlefield[i][j], end=' ')
+                if self.battlefield[i][j] == TicTacToe.SIGNS['X']:
+                    print('X', end=' ')
+                elif self.battlefield[i][j] == TicTacToe.SIGNS['O']:
+                    print('O', end=' ')
+                else:
+                    print(' ', end=' ')
             print('|')
         print('-' * 9)
 
@@ -39,10 +43,7 @@ class TicTacToe:
             for i in range(9):
                 if user_input[i] in TicTacToe.OPTIONS:
                     (x, y) = TicTacToe.COORD.get(i)
-                    if user_input[i] == '_':
-                        self.battlefield[x][y] = ' '
-                    else:
-                        self.battlefield[x][y] = user_input[i]
+                    self.battlefield[x][y] = TicTacToe.SIGNS.get(user_input[i], 0)
             self.count_x_y_empty(user_input)
             self.print_battlefield()
             self.next_move()
@@ -57,7 +58,7 @@ class TicTacToe:
     def check_if_empty_field(self, coord):
         tmp_coord = ''.join(coord)
         x, y = TicTacToe.PLAYER_COORD.get(f'{tmp_coord}')
-        if self.battlefield[x][y] != ' ':
+        if self.battlefield[x][y] != 1:     # ' ':
             print('This cell is occupied! Choose another one!')
             return False
         return True
@@ -66,7 +67,6 @@ class TicTacToe:
     def check_user_input_length(user_input):
         return len(user_input) == 9
 
-    # @staticmethod
     def correct_coordinates(self, crd):
         try:
             x, y = int(crd[0]), int(crd[1])
@@ -94,26 +94,44 @@ class TicTacToe:
 
     def next_move(self):
         """Next turn with 'X' or 'O' depending on the 'turn' status"""
-        while self.empty:
+        while self.empty and self.status:
             coord = input('Enter the coordinates: ').split()
             while not self.correct_coordinates(coord):
                 coord = input('Enter the coordinates: ').split()
-            tmp_coord = ''.join(coord)
-            x, y = TicTacToe.PLAYER_COORD.get(f'{tmp_coord}')
+            x, y = TicTacToe.PLAYER_COORD.get(f"""{''.join(coord)}""")
             self.turn = self.check_turn()
-            self.battlefield[x][y] = TicTacToe.SIGNS[f'{self.turn}']
+            self.battlefield[x][y] = TicTacToe.SIGNS.get(self.turn)
             self.print_battlefield()
             self.empty -= 1
-        self.check_result()
+            self.check_result()
 
     def check_result(self):
-
-        if self.empty > 0:
+        tmp_lst = list(zip(*self.battlefield))
+        for i in range(3):
+            if sum(self.battlefield[i]) == 15 or sum(tmp_lst[i]) == 15:
+                print('X wins')
+                self.status = False
+                break
+            elif sum(self.battlefield[i]) == 12 or sum(tmp_lst[i]) == 12:
+                print('O wins')
+                self.status = False
+                break
+            elif self.empty == 0 and sum(self.battlefield[i]) != 15 and sum(self.battlefield[i]) != 12\
+                    and sum(tmp_lst[i]) != 15 and sum(tmp_lst[i]) != 12:
+                print('Draw')
+                self.status = False
+                break
+        if self.status and (self.battlefield[0][0] + self.battlefield[1][1] + self.battlefield[2][2] == 15
+                            or self.battlefield[0][2] + self.battlefield[1][1] + self.battlefield[2][0] == 15):
+            print('X wins')
+            self.status = False
+        elif self.status and (self.battlefield[0][0] + self.battlefield[1][1] + self.battlefield[2][2] == 12
+                              or self.battlefield[0][2] + self.battlefield[1][1] + self.battlefield[2][0] == 12):
+            print('O wins')
+            self.status = False
+        elif self.status and self.empty > 0:
             print('Game not finished')
             self.status = True
-
-        self.status = False
-        print('THE END')
 
 
 def main():
