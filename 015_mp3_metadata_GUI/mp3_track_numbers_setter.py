@@ -4,7 +4,6 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import filedialog as fd
 from tkinter import messagebox as mb
-from tkinter.scrolledtext import ScrolledText
 from mutagen.id3 import ID3
 import os
 import sys
@@ -34,6 +33,7 @@ class MetaDataSetter(tk.Frame):
         choose_box_txt = ttk.Label(self, text='File type ')
         choose_box = ttk.Combobox(self, textvariable=self.ending, values=self.endings)
         set_tracks_btn = ttk.Button(self, text='Set tracks', command=self.set_tracks)
+        self.text_window = tk.Text(self, width=68, height=23)
 
         ttk.Label(self, text='').grid(row=0)
         info_btn.grid(row=1, column=0, columnspan=3)
@@ -46,14 +46,20 @@ class MetaDataSetter(tk.Frame):
         ttk.Label(self, text='').grid(row=5)
         set_tracks_btn.grid(row=6, column=0, columnspan=3)
         ttk.Label(self, text='').grid(row=7)
+        self.text_window.grid(row=8, column=0, columnspan=3)
         self.columnconfigure(1, weight=1)
 
-    def get_info(self):
+    @staticmethod
+    def get_info():
         txt = 'Riot enables to set track numbers from its metadata\n\n2020 Łukasz Nawrot'
         mb.showinfo('Riot Info', txt)
 
     def search_dir(self):
         self.directory.set(fd.askdirectory(initialdir='/'))
+        self.text_window.insert('end', self.directory.get())
+        for file in os.listdir(self.directory.get()):
+            self.text_window.insert('end', f'{file}\n')     # Prints chosen directory - files with no numbers
+        self.text_window.insert('end', '\n')
 
     def set_tracks(self):
         """"""
@@ -104,13 +110,16 @@ class MetaDataSetter(tk.Frame):
                 self.tmp.append(v)
 
     def create_full_title_list(self):
-        self.full_title_list = [i + ' ' + j + self.ending.get() for i, j in zip(self.tmp[0::2], self.tmp[1::2])]
+        self.full_title_list = [i + ' ' + j + '.' + self.ending.get() for i, j in zip(self.tmp[0::2], self.tmp[1::2])]
         for i, elem in enumerate(self.audio_files):
             # print(f'{elem}', ' --> ', f'{path}\\{full_title_list[i]}')
             self.path_track.set(f'{self.directory}\\{self.full_title_list[i]}')
+            self.text_window.insert('end', self.path_track.get()[8:])
+            self.text_window.insert('end', '\n')
             os.rename(elem, os.path.join(self.directory.get(), self.full_title_list[i]))
             self.counter += 1
         if self.counter > 0 and self.counter == len(self.audio_files):
+            self.text_window.insert('end', f'\n\n{self.counter} file(s) created')
             mb.showinfo('Riot', f'Finished!\n{self.counter} files created')
 
 
@@ -119,7 +128,7 @@ class Application(tk.Tk):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.title('Riot')
-        self.geometry('600x200')
+        self.geometry('600x600')
         self.resizable(width=False, height=False)
 
         MetaDataSetter(self).grid(sticky=(tk.E + tk.W + tk.N + tk.S))
