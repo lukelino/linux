@@ -119,7 +119,7 @@ class MetaDataSetter(tk.Frame):
             os.rename(elem, os.path.join(self.directory.get(), self.full_title_list[i]))
             self.counter += 1
         if self.counter > 0 and self.counter == len(self.audio_files):
-            self.text_window.insert('end', f'\n\n{self.counter} file(s) created')
+            self.text_window.insert('end', f'\n{self.counter} file(s) created')
             mb.showinfo('Riot', f'Finished!\n{self.counter} files created')
 
 
