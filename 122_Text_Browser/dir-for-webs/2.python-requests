@@ -1,0 +1,193 @@
+Requests: HTTP for Humansâ¢ — Requests 2.24.0 documentation
+[34mÂ¶[39m [34mInstallation[39m Installation
+>>>
+r
+=
+requests
+.
+get
+(
+'https://api.github.com/user'
+,
+auth
+=
+(
+'user'
+,
+'pass'
+))
+>>>
+r
+.
+status_code
+200
+>>>
+r
+.
+headers
+[
+'content-type'
+]
+'application/json; charset=utf8'
+>>>
+r
+.
+encoding
+'utf-8'
+>>>
+r
+.
+text
+'{"type":"User"...'
+>>>
+r
+.
+json
+()
+{'private_gists': 419, 'total_private_repos': 77, ...}
+[34msimilar code, sans Requests[39m [34murllib3[39m [34mÂ¶[39m Requests is ready for todayâs web.
+Keep-Alive & Connection Pooling
+International Domains and URLs
+Sessions with Cookie Persistence
+Browser-style SSL Verification
+Automatic Content Decoding
+Basic/Digest Authentication
+Elegant Key/Value Cookies
+Automatic Decompression
+Unicode Response Bodies
+HTTP(S) Proxy Support
+Multipart File Uploads
+Streaming Downloads
+Connection Timeouts
+Chunked Requests
+.netrc
+Requests officially supports Python 2.7 & 3.5+, and runs great on PyPy.
+[34mÂ¶[39m This part of the documentation, which is mostly prose, begins with some
+background information about Requests, then focuses on step-by-step
+instructions for getting the most out of Requests.
+[34mInstallation of Requests[39m $ python -m pip install requests
+[34m$ python -m pip install requests[39m Get the Source Code
+[34mGet the Source Code[39m [34mQuickstart[39m Make a Request
+[34mMake a Request[39m Passing Parameters In URLs
+[34mPassing Parameters In URLs[39m Response Content
+[34mResponse Content[39m Binary Response Content
+[34mBinary Response Content[39m JSON Response Content
+[34mJSON Response Content[39m Raw Response Content
+[34mRaw Response Content[39m Custom Headers
+[34mCustom Headers[39m More complicated POST requests
+[34mMore complicated POST requests[39m POST a Multipart-Encoded File
+[34mPOST a Multipart-Encoded File[39m Response Status Codes
+[34mResponse Status Codes[39m Response Headers
+[34mResponse Headers[39m Cookies
+[34mCookies[39m Redirection and History
+[34mRedirection and History[39m Timeouts
+[34mTimeouts[39m Errors and Exceptions
+[34mErrors and Exceptions[39m [34mAdvanced Usage[39m Session Objects
+[34mSession Objects[39m Request and Response Objects
+[34mRequest and Response Objects[39m Prepared Requests
+[34mPrepared Requests[39m SSL Cert Verification
+[34mSSL Cert Verification[39m Client Side Certificates
+[34mClient Side Certificates[39m CA Certificates
+[34mCA Certificates[39m Body Content Workflow
+[34mBody Content Workflow[39m Keep-Alive
+[34mKeep-Alive[39m Streaming Uploads
+[34mStreaming Uploads[39m Chunk-Encoded Requests
+[34mChunk-Encoded Requests[39m POST Multiple Multipart-Encoded Files
+[34mPOST Multiple Multipart-Encoded Files[39m Event Hooks
+[34mEvent Hooks[39m Custom Authentication
+[34mCustom Authentication[39m Streaming Requests
+[34mStreaming Requests[39m Proxies
+[34mProxies[39m Compliance
+[34mCompliance[39m HTTP Verbs
+[34mHTTP Verbs[39m Custom Verbs
+[34mCustom Verbs[39m Link Headers
+[34mLink Headers[39m Transport Adapters
+[34mTransport Adapters[39m Blocking Or Non-Blocking?
+[34mBlocking Or Non-Blocking?[39m Header Ordering
+[34mHeader Ordering[39m Timeouts
+[34mTimeouts[39m [34mAuthentication[39m Basic Authentication
+[34mBasic Authentication[39m Digest Authentication
+[34mDigest Authentication[39m OAuth 1 Authentication
+[34mOAuth 1 Authentication[39m OAuth 2 and OpenID Connect Authentication
+[34mOAuth 2 and OpenID Connect Authentication[39m Other Authentication
+[34mOther Authentication[39m New Forms of Authentication
+[34mNew Forms of Authentication[39m [34mÂ¶[39m This part of the documentation, which is mostly prose, details the
+Requests ecosystem and community.
+[34mRecommended Packages and Extensions[39m Certifi CA Bundle
+[34mCertifi CA Bundle[39m CacheControl
+[34mCacheControl[39m Requests-Toolbelt
+[34mRequests-Toolbelt[39m Requests-Threads
+[34mRequests-Threads[39m Requests-OAuthlib
+[34mRequests-OAuthlib[39m Betamax
+[34mBetamax[39m [34mFrequently Asked Questions[39m Encoded Data?
+[34mEncoded Data?[39m Custom User-Agents?
+[34mCustom User-Agents?[39m Why not Httplib2?
+[34mWhy not Httplib2?[39m Python 3 Support?
+[34mPython 3 Support?[39m Python 2 Support?
+[34mPython 2 Support?[39m What are âhostname doesnât matchâ errors?
+[34mWhat are âhostname doesnât matchâ errors?[39m [34mIntegrations[39m Python for iOS
+[34mPython for iOS[39m Articles & Talks
+[34mArticles & Talks[39m [34mSupport[39m Stack Overflow
+[34mStack Overflow[39m File an Issue
+[34mFile an Issue[39m Send a Tweet
+[34mSend a Tweet[39m [34mVulnerability Disclosure[39m Process
+[34mProcess[39m Previous CVEs
+[34mPrevious CVEs[39m [34mRelease Process and Rules[39m Major Releases
+[34mMajor Releases[39m Minor Releases
+[34mMinor Releases[39m Hotfix Releases
+[34mHotfix Releases[39m Reasoning
+[34mReasoning[39m Community Updates
+[34mCommunity Updates[39m Release History
+[34mRelease History[39m [34mÂ¶[39m If you are looking for information on a specific function, class, or method,
+this part of the documentation is for you.
+[34mDeveloper Interface[39m Main Interface
+[34mMain Interface[39m Exceptions
+[34mExceptions[39m Request Sessions
+[34mRequest Sessions[39m Lower-Level Classes
+[34mLower-Level Classes[39m Lower-Lower-Level Classes
+[34mLower-Lower-Level Classes[39m Authentication
+[34mAuthentication[39m Encodings
+[34mEncodings[39m Cookies
+[34mCookies[39m Status Code Lookup
+[34mStatus Code Lookup[39m Migrating to 1.x
+[34mMigrating to 1.x[39m Migrating to 2.x
+[34mMigrating to 2.x[39m [34mÂ¶[39m If you want to contribute to the project, this part of the documentation is for
+you.
+[34mContributorâs Guide[39m Be Cordial
+[34mBe Cordial[39m Get Early Feedback
+[34mGet Early Feedback[39m Contribution Suitability
+[34mContribution Suitability[39m [34mCode Contributions[39m Steps for Submitting Code
+[34mSteps for Submitting Code[39m Code Review
+[34mCode Review[39m New Contributors
+[34mNew Contributors[39m Kenneth Reitzâs Code Styleâ¢
+[34mKenneth Reitzâs Code Styleâ¢[39m Documentation Contributions
+[34mDocumentation Contributions[39m Bug Reports
+[34mBug Reports[39m Feature Requests
+[34mFeature Requests[39m [34mAuthors[39m Keepers of the Crystals
+[34mKeepers of the Crystals[39m Previous Keepers of Crystals
+[34mPrevious Keepers of Crystals[39m Patches and Suggestions
+[34mPatches and Suggestions[39m There are no more guides. You are now guideless.
+Good luck.
+Requests is an elegant and simple HTTP library for Python, built for
+human beings.
+[34mCERT Gouvernemental - GOVCERT.LU[39m Useful Links
+Quickstart
+[34mQuickstart[39m Advanced Usage
+[34mAdvanced Usage[39m API Reference
+[34mAPI Reference[39m Release History
+[34mRelease History[39m Contributors Guide
+[34mContributors Guide[39m Recommended Packages and Extensions
+[34mRecommended Packages and Extensions[39m Requests @ GitHub
+[34mRequests @ GitHub[39m Requests @ PyPI
+[34mRequests @ PyPI[39m Issue Tracker
+[34mIssue Tracker[39m Translations
+English
+[34mEnglish[39m French
+[34mFrench[39m German
+[34mGerman[39m Japanese
+[34mJapanese[39m Chinese
+[34mChinese[39m Portuguese
+[34mPortuguese[39m Italian
+[34mItalian[39m Spanish
+[34mSpanish[39m Quick search
+[34mKenneth Reitz[39m 
